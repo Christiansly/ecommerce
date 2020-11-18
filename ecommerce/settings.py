@@ -27,7 +27,7 @@ SECRET_KEY = 'j$gnew1t=5(i1zwn65jsp2rz)$)f$1%$&r-!e-w_ojeb&a2lx&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://ecommercedjangoapp.herokuapp.com/']
+ALLOWED_HOSTS = ['ecommercedjangoapp.herokuapp.com']
 
 
 # Application definition
