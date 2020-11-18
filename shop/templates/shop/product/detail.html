@@ -32,13 +32,16 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Size</label>
                     </div>
+                    {% if product.variation %}
                     <select class="custom-select" id="inputGroupSelect01" name="size">
-                    
                         {% for var in product.variation.all %}
                         
                         <option value="{{var}}">{{var}}</option>
                         {% endfor %}
                     </select>
+                    {% else %}
+                    <input type="hidden" name="size" value="none">
+                    {% endif %}
                 </div>
                 <div class="input-group mb-3 w-25" >
 
