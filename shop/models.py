@@ -71,8 +71,7 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
-    second_image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
-    third_image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
+ 
 
     class Meta:
         ordering = ('created',) 
