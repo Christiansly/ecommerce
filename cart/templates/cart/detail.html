@@ -1,0 +1,133 @@
+{% extends 'shop/product/list.html' %}
+{% load static %}
+{% load l10n %}
+
+{% block body %} 
+    <div class="container-fluid">
+        <h3>Shopping Cart</h3>
+        <p>You have 
+            {% with total_items=cart|length %}
+                        {% if total_items > 0 %}
+                            {{total_items}}
+                        {% endif %}
+            {% endwith %}
+        </p>
+        <div class="container">
+        {% for item in cart %}
+            <div class="row" style="margin: 1rem;">
+            {% with product=item.product %}
+            
+                
+                <div class="col row">
+                
+                    <a href="{{ product.get_absolute_url }}">
+                        <img style="width: 100px; height: 100px;" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                    </a>
+                    <div class="col">
+                        <div><strong>{{product.name}}</strong></div>
+                        <div>Size: {{item.size}}</div>
+                    </div>
+                </div>
+                
+                <div class="col row">
+                    <div class="col">
+                        <small><strong>Product-price</strong></small>
+                        &#x20A6;{{product.price|localize}}
+                    </div>
+                    <div class="col">
+                        <small><strong>Quantity</strong></small>
+                        <form action="{% url "cart:cart_add" product.id %}" method="post">
+                        <select style="font-size: small;" class="custom-select w-30" id="inputGroupSelect01" name="quantity">
+                            <option value="1">1</option>
+                            
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">5</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option selected value="{{item.update_quantity_form.quantity}}">{{item.update_quantity_form.quantity}}</option>
+                        
+                        </select>
+                            <input type="hidden" name="override" value="override">
+                            <input type="hidden" value="{{item.size}}" name="size">
+                            <button type="submit" class="btn btn-secondary">Update</button>
+                            {% csrf_token %}
+                         </form>
+                    </div>
+                    <div class="col">
+                        <small><strong>Total-price</strong></small>
+                        &#x20A6;{{item.total_price|localize}}
+                    </div>
+                    <div class="col">
+                        <form action="{% url "cart:cart_remove" product.id %}" method="post">
+                           <button type="submit" value="Remove" class="close" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                            </button>
+                            {% csrf_token %}
+                        </form>
+ 
+                    </div>
+
+                </div>
+               
+                
+            
+            {% endwith %}
+            </div>
+            <hr>
+        {% endfor %}
+        </div>
+         <div class="col shadow p-3 mb-5 bg-white rounded">
+                    <h3>Order Summary</h3>
+                    <small>Additional fees are calculated based on the items you entered</small>
+                    <hr>
+                    <div class="col row">
+                        <div class="col row" style="justify-content: space-between;">
+                            <strong>Sub-total</strong>
+                            &#x20A6;{{cart.get_total_price|localize}}
+                            <div id="sub" style="display: none;">{{cart.get_total_price}}</div>
+                        </div>
+                        
+                    </div>
+                    <div class="col row">
+                        <div class="col row" style="justify-content: space-between;">
+                            <strong>Shipping fee</strong>
+                            &#x20A6; 1,000.00
+                        </div>
+                        
+                    </div>
+                    <hr>
+                    <div class="col row">
+                        <div class="col row" style="justify-content: space-between;">
+                            <strong>Total</strong>
+                            <span>&#x20A6;<span id="total"></span></span>
+                        </div>
+                        
+                    </div>
+                    <hr>
+
+                </div>
+                
+                <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 5px;">
+                    <a href="{% url "shop:product_list" %}" class="button
+                    light" style="color: aliceblue;"><button type="button" class="btn btn-secondary">Continue shopping</button></a>
+                    
+                    <a href="{% url "orders:order_create" %}" class="button" style="color: aliceblue;"><button type="button" class="btn btn-secondary">Checkout</button></a>
+                </div>
+    </div>
+
+    
+
+{% endblock %}
+
+{% block javascript %}
+    let total = document.getElementById('total');
+    let sub = document.getElementById('sub');
+    sub = sub.innerText.split(",")
+    sub = sub[0] + sub[1]
+    
+    total.innerHTML = Number(sub) + 1000.00;
+{% endblock %}

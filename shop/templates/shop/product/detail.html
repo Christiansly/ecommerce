@@ -1,0 +1,81 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load l10n %}
+{% block title %}
+    {{product.name}}
+{% endblock %}
+
+{% block cat %}
+{% for c in categories %}
+<li {% if category.name == c.name %}class="selected" {% endif %}>
+    <a href="{{c.get_absolute_url}}">{{c.name}}</a>
+</li>
+{% endfor %}
+{% endblock %}
+{% block body %}
+
+<div class="main">
+    <div class="container-xl">
+        <div class="row">
+        <div class="col">
+            <img src="{{product.image.url}}" style="min-width: 250px; max-width: 300px; max-height: 450px; min-height: 300px;">
+        </div>
+        <div class="col" style="min-width: fit-content;">
+            <h2 class="product-detail__name">{{product.name}}</h2>
+            <small>Brand: <a href="{{product.brands.get_absolute_url}}">{{product.brands}}</a></small><br>
+            <strong>&#x20A6;{{product.price|localize}}</strontg>
+            <hr>
+            
+            <form action="{% url "cart:cart_add" product.id %}" method="POST">
+                <div class="input-group mb-3 w-25">
+
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Size</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01" name="size">
+                    
+                        {% for var in product.variation.all %}
+                        
+                        <option value="{{var}}">{{var}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="input-group mb-3 w-25" >
+
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Qty</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01" name="quantity">
+                        <option selected value="1">1</option>
+                         <option value="2">2</option>
+                         <option value="3">3</option>
+                         <option value="4">4</option>
+                         <option value="5">5</option>
+                         <option value="6">6</option>
+                         <option value="7">7</option>
+                         <option value="8">8</option>
+                         <option value="9">9</option>
+                    
+                    </select>
+                </div>
+            
+            <hr>
+                    <input type="hidden" name="override">
+                    {% csrf_token %}    
+                    <button type="submit" class="btn btn-secondary" >Add to cart</button>
+            </form>
+            
+        </div>
+        <p>
+            {% if product.detail %}
+                <strong>Product Description</strong>:
+                {{ product.detail|linebreaks}}
+                
+            {% endif %}
+            </p>
+        </div>
+    </div>
+        
+    
+</div>
+{% endblock %}

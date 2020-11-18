@@ -1,0 +1,33 @@
+{% extends 'shop/base.html' %}
+{% block title %}
+{{order}}
+{% endblock %}
+{% block body %}
+<div class="main">
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+        <h2>{{order}}</h2>
+        <div class="row">
+        {% for item in order_item %}
+            <div class="container shadow p-3 mb-5 bg-white rounded" style="max-width: 450px;">
+                <div class="row">
+                    <div>
+                        <img style="width: 120px; height: 120px;" src="{{item.product.image.url}}">
+                    </div>
+                    <div>
+                        <strong>Item Id:</strong> {{item}} <br>
+                        <strong>Product Name:</strong> <a href="{{item.product.get_absolute_url}}">{{item.product}}</a><br>
+                        {% if item.size %}
+                        <strong>Size:</strong> {{item.size}}<br>
+                        {% endif %}
+                        <strong>Price:</strong> &#8358;{{item.price}}<br>
+                        <strong>Quantity:</strong> {{item.quantity}}<br>
+                    </div>
+                </div>
+            </div>
+            
+        {% endfor %}
+        </div>
+        <p><strong>Total cost:</strong> &#8358;{{order.get_total_cost}}</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "shop/base.html" %}
+{% block title %}Create an account{% endblock %}
+{% block body %}
+
+ <div class="main">
+   <div class="alert alert-secondary" role="alert">
+         {% if messages %}
+ 
+ {% for message in messages %}
+ 
+ {{ message|safe }}
+
+ {% endfor %}
+ 
+{% endif %}
+    </div>
+
+  <div class="container shadow p-3 mb-5 bg-white rounded" style="max-width: 450px;">
+    <h1>Create an account</h1>
+  <small>Please, sign up using the following form:</small>
+  <br>
+  <br>
+    
+      <form method="post">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input
+        type="email"
+        name="username"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+
+        required
+        autofocus
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >We'll never share your email with anyone else.</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputFirst">First name</label>
+      <input
+        type="text"
+        name="first_name"
+        class="form-control"
+        id="exampleInputFirst"
+        required
+      />
+    </div>
+     <div class="form-group">
+      <label for="exampleInputLast">Last name</label>
+      <input
+        type="text"
+        name="last_name"
+        class="form-control"
+        id="exampleInputLast"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword2">Repeat Password</label>
+      <input
+        type="password"
+        name="password2"
+        class="form-control"
+        id="exampleInputPassword2"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-secondary">Create my account</button>
+
+    {% csrf_token %}
+  </form>
+
+  
+</div>
+      </div>
+
+{% endblock %}

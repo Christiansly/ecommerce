@@ -1,0 +1,25 @@
+{% extends 'shop/base.html' %}
+{% block body %}
+<div class="main">
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+        <h2>Your Order</h2>
+        <div class="row">
+        {% for o in order %}
+            <div class="container shadow p-3 mb-5 bg-white rounded" style="max-width: 450px;">
+                
+                    
+                    <div>
+                        <strong>Order Id:</strong> <a href="{{o.get_absolute_url}}">{{o}}</a> <br>
+                        <strong>Created: </strong> {{o.created}} <br>
+                        <strong>Paid:</strong> {{o.paid}} <br>
+                        <strong>Total cost:</strong> &#8358;{{o.get_total_cost}}
+                    </div>
+                    
+            </div>
+            
+        {% endfor %}
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

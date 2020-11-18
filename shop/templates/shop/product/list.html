@@ -1,0 +1,38 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load l10n %}
+
+{% block title %}
+    {% if category %}
+        {{category.name}}
+    {% else %}
+        MySHOP | Online Shop 
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    
+    <div class="main">
+        <h4>{% if category.name %}{{category.name}}{% elif brand.name %}{{brand.name}}{% elif query %}results for {{query}}{% else %}All Products{% endif %}</h4>
+        <div class="container-xl shadow p-3 mb-5 bg-white rounded">
+            <div  class="row">
+            {% for product in products %}
+                <div class="col shadow p-3 mb-5 bg-white rounded animate__animated animate__bounce animate__faster" style="max-width: 200px; min-width: 150px;">
+                    <a href="{{product.get_absolute_url}}"><div class="product__img">
+                        <img src="{% if product.image %}{{product.image.url}}{% else %}{% static 'img/no_image.png' %}{% endif %}" style="width: 100%; height: 10rem;"/>
+                    </div></a>
+                    <div class="container">
+                        <a href="{{product.get_absolute_url}}" style="color: black;">
+                            <div class="product__name">{{product.name}}</div>
+                        </a>
+                        <div class="product__price">&#x20A6; {{product.price|localize}}</div>
+                    </div>
+                    
+                </div>
+            {% empty %}
+             <p>No results</p>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
