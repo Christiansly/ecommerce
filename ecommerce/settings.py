@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'j$gnew1t=5(i1zwn65jsp2rz)$)f$1%$&r-!e-w_ojeb&a2lx&'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -149,9 +149,9 @@ CART_SESSION_ID = 'cart'
 USE_L10N = True
 USE_THOUSAND_SEPARATOR = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-BRAINTREE_MERCHANT_ID = 'h74cz9nmt4kjpsn7'  # Merchant ID
-BRAINTREE_PUBLIC_KEY = '5sws4jtccr8n7hpx'  # Public Key
-BRAINTREE_PRIVATE_KEY = '0cf58a788c7300a2137fd5654eee0b06'  # Private key
+BRAINTREE_MERCHANT_ID = ''  # Merchant ID
+BRAINTREE_PUBLIC_KEY = ''  # Public Key
+BRAINTREE_PRIVATE_KEY = ''  # Private key
 BRAINTREE_CONF = braintree.Configuration(
     braintree.Environment.Sandbox,
     BRAINTREE_MERCHANT_ID,
