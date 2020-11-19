@@ -52,7 +52,8 @@ def brand_detail(request, brand_slug):
 def product_detail(request, id, slug):
     categories = Category.objects.all()
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    return render(request, 'shop/product/detail.html', {'product': product, 'categories': categories})
+    size = product.variation.all().count()
+    return render(request, 'shop/product/detail.html', {'product': product, 'categories': categories, 'size': size})
 
 
 def index(request):

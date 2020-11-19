@@ -25,7 +25,9 @@
                     </a>
                     <div class="col">
                         <div><strong>{{product.name}}</strong></div>
+                        {% if not item.size == 'none' %}
                         <div>Size: {{item.size}}</div>
+                        {% endif %}
                     </div>
                 </div>
                 

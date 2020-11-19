@@ -28,11 +28,11 @@
             
             <form action="{% url "cart:cart_add" product.id %}" method="POST">
                 <div class="input-group mb-3 w-25">
-
+                    {% if size > 0 %}
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Size</label>
                     </div>
-                    {% if product.variation %}
+                    
                     <select class="custom-select" id="inputGroupSelect01" name="size">
                         {% for var in product.variation.all %}
                         
